@@ -18,18 +18,16 @@ import Loading from "../loading/Loading";
 const Products = () => {
   let API = "https://dummyjson.com";
 
-  //
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [categoryValue, seCategoryValue] = useState(null);
-  let [offset, setOffset] = useState(1);
-
-  //
-
   const [searchParams, setSearchParams] = useSearchParams();
   const [singleData, setSingleData] = useState(null);
   const [detailLoading, setDetailLoading] = useState(false);
+
   let id = searchParams.get("detail");
+  let offset = parseInt(searchParams.get("offset")) || 1;
+
   const closeDetailModel = useCallback(() => {
     setSingleData(null);
     setSearchParams({});
@@ -44,7 +42,7 @@ const Products = () => {
         .catch()
         .finally(() => setDetailLoading(false));
     }
-  }, [searchParams]);
+  }, [id]);
 
   useEffect(() => {
     axios
@@ -58,21 +56,34 @@ const Products = () => {
       )
       .then((res) => setData(res.data.products));
   }, [categoryValue, offset]);
+
   useEffect(() => {
     axios
       .get(`${API}/products/categories`)
       .then((res) => setCategories(res.data));
   }, []);
 
+  const handleCategoryClick = (category) => {
+    seCategoryValue(category);
+    setSearchParams({ offset: 1 });
+  };
+
+  const handleSeeMore = () => {
+    setSearchParams((prev) => {
+      let newOffset = parseInt(prev.get("offset")) || 1;
+      return { ...prev, offset: newOffset + 1 };
+    });
+  };
+
   return (
     <div className="products__wrapper container">
       <div className="products__wrapper__header">
         <ul>
-          <li onClick={() => seCategoryValue(null)}>All</li>
+          <li onClick={() => handleCategoryClick(null)}>All</li>
           {categories?.map((category) => (
             <li
-              onClick={() => seCategoryValue(category.slug)}
-              key={category.name}
+              onClick={() => handleCategoryClick(category.slug)}
+              key={category}
             >
               {category.name}
             </li>
@@ -89,9 +100,7 @@ const Products = () => {
             />
             <div className="product__card__info">
               <NavLink to={`/product/${product.id}`}>
-                <h2 >
-                  {product.title}
-                </h2>
+                <h2>{product.title}</h2>
               </NavLink>
               <p>{product.description}</p>
             </div>
@@ -108,18 +117,18 @@ const Products = () => {
                   <path
                     d="M14.2911 5.37109H1V20.0002H14.2911V5.37109Z"
                     stroke="black"
-                    stroke-width="1.4"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.4"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M4.12207 7.15493V3.40845C4.12207 2.07042 5.10329 1 6.26292 1H9.02818C10.1878 1 11.169 2.07042 11.169 3.40845V7.15493"
                     stroke="black"
-                    stroke-width="1.4"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.4"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
                 <p>В корзину</p>
@@ -128,7 +137,7 @@ const Products = () => {
           </div>
         ))}
       </div>
-      <button onClick={() => setOffset((p) => p + 1)} className="see__more-btn">
+      <button onClick={handleSeeMore} className="see__more-btn">
         Показать ещё
       </button>
       {id ? (
@@ -151,38 +160,16 @@ const Products = () => {
                 modules={[EffectCube, Pagination]}
                 className="mySwiper"
               >
-                <SwiperSlide>
-                  <img
-                    width={300}
-                    style={{ height: "100%" }}
-                    src={singleData?.images[0]}
-                    alt=""
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    width={300}
-                    style={{ height: "100%" }}
-                    src={singleData?.images[1]}
-                    alt=""
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    width={300}
-                    style={{ height: "100%" }}
-                    src={singleData?.images[2]}
-                    alt=""
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    width={300}
-                    style={{ height: "100%" }}
-                    src={singleData?.images[3]}
-                    alt=""
-                  />
-                </SwiperSlide>
+                {singleData?.images.map((image, index) => (
+                  <SwiperSlide key={index}>
+                    <img
+                      width={300}
+                      style={{ height: "100%" }}
+                      src={image}
+                      alt=""
+                    />
+                  </SwiperSlide>
+                ))}
               </Swiper>
 
               <div className="model__item__info">
@@ -199,11 +186,9 @@ const Products = () => {
             </div>
           )}
         </Model>
-      ) : (
-        <></>
-      )}
+      ) : null}
 
-      {id ? <div onClick={closeDetailModel} className="overlay"></div> : <></>}
+      {id ? <div onClick={closeDetailModel} className="overlay"></div> : null}
     </div>
   );
 };
