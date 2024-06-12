@@ -1,0 +1,143 @@
+.single__item {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+}
+
+.single__card,
+.single__loading {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  min-height: 600px;
+}
+
+.single__card__left,
+.single__loading__img,
+.single__loading__info .single__card__right {
+  width: 45%;
+}
+
+.single__card__left {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  img {
+    width: 100px;
+    border-radius: 10px;
+  }
+}
+
+.single__card__right,
+.single__loading__info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.single__card__left img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 930px) {
+  .single__card,
+  .single__loading {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  .single__card__left,
+  .single__loading__img,
+  .single__loading__info .single__card__right {
+    width: 100%;
+  }
+  .single__loading__img{
+    height: 600px;
+  }
+  .single__card__right{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+}
+
+.single__loading__img,
+.single__loading__info {
+  width: 50%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.single__loading__item {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.single__loading__item:first-child {
+  width: 50%;
+}
+
+.single__loading__item:nth-child(2) {
+  height: 80px;
+}
+
+.single__loading__item:nth-child(3) {
+  width: 90%;
+}
+.single__loading__item:nth-child(4) {
+  width: 80%;
+}
+
+.single__loading__item:nth-child(5) {
+  width: 80%;
+}
+
+.single__loading__item:nth-child(6) {
+  width: 60%;
+}
+
+.single__loading {
+  height: 500px;
+  width: 100%;
+}
+
+.bg__animation {
+  background: linear-gradient(90deg, #eee, #ddd, #eee);
+  background-size: 200%;
+  animation: bgMove 1s linear 0s infinite;
+}
+@keyframes bgMove {
+  to {
+    background-position: 200%;
+  }
+}
+
+.single__btns {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  .add__cart-btn {
+    background: rgb(0, 255, 0);
+    color: white;
+    border: 1px solid rgb(0, 255, 0);
+    border-radius: 10px;
+    padding: 10px 20px;
+    transition: 0.4s;
+  }
+  .add__cart-btn:hover {
+    background: green;
+    border-color: green;
+  }
+  .like__btn {
+    background: transparent;
+    font-size: 25px;
+    border: none;
+  }
+}

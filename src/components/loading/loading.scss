@@ -1,0 +1,28 @@
+.bg__animation {
+  background: linear-gradient(90deg, #eee, #ddd, #eee);
+  background-size: 200%;
+  animation: bgMove 1s linear 0s infinite;
+}
+@keyframes bgMove {
+  to {
+    background-position: 200%;
+  }
+}
+
+.loading__card {
+  width: 100%;
+  height: 400px;
+  .loading__img {
+    height: 60%;
+  }
+  .loading__info{
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+    .loading__desc{
+        height: 50px;
+    }
+  }
+}

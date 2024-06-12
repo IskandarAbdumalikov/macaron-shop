@@ -1,0 +1,147 @@
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+}
+
+@media (max-width: 1100px) {
+  .header__top__nav {
+    display: none;
+  }
+}
+
+.header__top__nav {
+  background: #f7ebe5;
+  padding: 10px 0px;
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__location,
+  &__contact,
+  &__cart,
+  &__socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    select {
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+  }
+}
+
+.bar {
+  display: none;
+}
+
+.left__closer,
+.right__closer {
+  display: none;
+}
+
+@media (max-width: 970px) {
+  .bar {
+    display: block;
+  }
+  .header__bottom__nav__left__list {
+    position: fixed;
+    width: 30%;
+    height: 100vh;
+    top: 0;
+    left: -100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 10px gray;
+    transition: 0.4s;
+    z-index: 999;
+  }
+  .header__bottom__nav__right__list {
+    position: fixed;
+    width: 30%;
+    height: 100vh;
+    top: 0;
+    right: -100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 10px gray;
+    transition: 0.4s;
+    z-index: 999;
+  }
+  .show__left {
+    left: 0;
+  }
+  .show__right {
+    right: 0;
+  }
+  .left__closer,
+  .right__closer {
+    display: block;
+    position: absolute;
+    top: 20px;
+  }
+  .left__closer {
+    right: 20px;
+  }
+  .right__closer {
+    left: 20px;
+  }
+}
+
+
+.header__bottom__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0px;
+  &__logo {
+    padding: 20px 0px;
+  }
+  &__left__list,
+  &__right__list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    li {
+      display: flex;
+      align-items: center;
+    }
+    select {
+      border: none;
+      outline: none;
+    }
+  }
+}
+
+
+
+@media (max-width: 630px) {
+  .header__bottom__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0px;
+    &__logo {
+      padding: 10px 0px;
+      width: 150px;
+    }
+  }
+}
