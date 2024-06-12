@@ -165,7 +165,7 @@ const Products = () => {
                     <img
                       width={300}
                       style={{ height: "100%" }}
-                      src={image}
+                      src={singleData.images[index]}
                       alt=""
                     />
                   </SwiperSlide>
